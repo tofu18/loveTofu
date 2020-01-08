@@ -1,12 +1,16 @@
 import sys, random
-from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtGui import QPainter, QColor
+from ui_file import Ui_Form
 
-class MyWidget(QWidget):
+
+
+
+class MyWidget(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
+
         self.pushButton.clicked.connect(self.update)
 
     def paintEvent(self, event):
@@ -17,10 +21,8 @@ class MyWidget(QWidget):
 
     def draww(self, qp):
         x, y, w = random.randrange(0, 666), random.randrange(0, 666), random.randrange(10, 300)
-        qp.setBrush(QColor(255, 255, 0))
+        qp.setBrush(QColor(random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255)))
         qp.drawEllipse(x, y, w, w)
-
-
 
 app = QApplication(sys.argv)
 ex = MyWidget()
